@@ -1,9 +1,9 @@
 plugins {
     java
+    id("org.shipkit.java") version "2.3.1"
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "com.github.magx2.steroids"
 
 repositories {
     mavenCentral()
