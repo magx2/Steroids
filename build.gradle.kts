@@ -10,7 +10,14 @@ repositories {
 }
 
 dependencies {
-    testCompile("junit", "junit", "4.12")
+    // TEST
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.1")
+    testImplementation("org.mockito:mockito-all:1.10.19")
+    testImplementation("org.assertj:assertj-core:3.15.0")
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 configure<JavaPluginConvention> {
