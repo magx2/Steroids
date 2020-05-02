@@ -52,7 +52,7 @@ public interface ImmutableMap<KeyT, ValueT> extends Map<KeyT, ValueT> {
      * This method is unsupported.
      *
      * @throws UnsupportedOperationException always
-     * @see ImmutableMap::putToNew
+     * @see ImmutableMap#putToNew
      */
     @Override
     default ValueT put(final KeyT key, final ValueT value) {
@@ -63,7 +63,7 @@ public interface ImmutableMap<KeyT, ValueT> extends Map<KeyT, ValueT> {
      * This method is unsupported.
      *
      * @throws UnsupportedOperationException always
-     * @see ImmutableMap::removeFromNew
+     * @see ImmutableMap#removeFromNew
      */
     @Override
     default ValueT remove(final Object key) {
@@ -74,7 +74,7 @@ public interface ImmutableMap<KeyT, ValueT> extends Map<KeyT, ValueT> {
      * This method is unsupported.
      *
      * @throws UnsupportedOperationException always
-     * @see ImmutableMap::putAllToNew
+     * @see ImmutableMap#putAllToNew
      */
     @Override
     default void putAll(final Map<? extends KeyT, ? extends ValueT> m) {
