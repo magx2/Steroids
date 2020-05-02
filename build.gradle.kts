@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation("javax.validation:validation-api:2.0.1.Final")
+
     // TEST
     testImplementation("org.junit.jupiter:junit-jupiter:5.6.1")
     testImplementation("org.mockito:mockito-all:1.10.19")

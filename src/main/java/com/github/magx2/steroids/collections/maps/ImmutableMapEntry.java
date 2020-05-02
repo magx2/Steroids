@@ -14,6 +14,14 @@ public final class ImmutableMapEntry<K, V> implements Map.Entry<K, V> {
     private final K key;
     private final V value;
 
+    public static <K, V> ImmutableMapEntry<K, V> fromMapEntry(Map.Entry<K, V> entry) {
+        return new ImmutableMapEntry<>(entry.getKey(), entry.getValue());
+    }
+
+    public static <K, V> ImmutableMapEntry<K, V> of(final K key, final V value) {
+        return new ImmutableMapEntry<>(key, value);
+    }
+
     public ImmutableMapEntry(final K key, final V value) {
         this.key = key;
         this.value = value;
