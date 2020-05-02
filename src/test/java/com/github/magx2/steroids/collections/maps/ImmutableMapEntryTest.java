@@ -1,4 +1,4 @@
-package com.github.steroids.collections.maps;
+package com.github.magx2.steroids.collections.maps;
 
 import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
