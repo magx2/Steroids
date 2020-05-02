@@ -4,6 +4,8 @@ import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -63,5 +65,55 @@ class AvoidNullTest {
         assertThatThrownBy(when)
                 .hasNoCause()
                 .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("should return `Optional` of first element from objects")
+    void tryFirstNonNullOneElements() {
+        // when
+        final Optional<String> firstNonNull = AvoidNull.tryFirstNonNull("x");
+
+        // then
+        assertThat(firstNonNull).contains("x");
+    }
+
+    @Test
+    @DisplayName("should return `Optional` of second element from objects")
+    void tryFirstNonNullMultipleElements() {
+        // when
+        final Optional<String> firstNonNull = AvoidNull.tryFirstNonNull(null, "x", null, "y");
+
+        // then
+        assertThat(firstNonNull).contains("x");
+    }
+
+    @Test
+    @DisplayName("should return empty `Optional` if only passed null")
+    void tryFirstNonNullOneNull() {
+        // when
+        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull(null);
+
+        // then
+        assertThat(firstNonNull).isEmpty();
+    }
+
+    @Test
+    @DisplayName("should return empty `Optional` if all objects was null")
+    void tryFirstNonNullMultipleNulls() {
+        // when
+        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull(null, null, null);
+
+        // then
+        assertThat(firstNonNull).isEmpty();
+    }
+
+    @Test
+    @DisplayName("should return empty `Optional` if all objects was null")
+    void tryFirstNonNullRestIsNull() {
+        // when
+        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull(null, (Object[]) null);
+
+        // then
+        assertThat(firstNonNull).isEmpty();
     }
 }

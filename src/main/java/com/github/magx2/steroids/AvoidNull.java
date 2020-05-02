@@ -3,6 +3,7 @@ package com.github.magx2.steroids;
 import jdk.internal.jline.internal.Nullable;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 public final class AvoidNull {
     /**
@@ -24,5 +25,19 @@ public final class AvoidNull {
             }
         }
         throw new NullPointerException("Everything was null!");
+    }
+
+    @SafeVarargs
+    public static <T> Optional<T> tryFirstNonNull(@Nullable T first, @Nullable T... rest) {
+        if (first != null) {
+            return Optional.of(first);
+        } else if (rest != null) {
+            for (T object : rest) {
+                if (object != null) {
+                    return Optional.of(object);
+                }
+            }
+        }
+        return Optional.empty();
     }
 }
