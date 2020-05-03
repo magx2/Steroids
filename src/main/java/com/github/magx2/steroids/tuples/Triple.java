@@ -4,6 +4,13 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * Immutable triple of three values.
+ *
+ * @param <FirstT>  Type of the first parameter
+ * @param <SecondT> Type of the second parameter
+ * @param <ThirdT>  Type of the third parameter
+ */
 public final class Triple<FirstT, SecondT, ThirdT> {
     private final FirstT first;
     private final SecondT second;
@@ -22,10 +29,20 @@ public final class Triple<FirstT, SecondT, ThirdT> {
         this.third = third;
     }
 
+    /**
+     * Takes <code>first</code> value from Triple and pack it into {@link Optional}.
+     *
+     * @return Optional of first
+     */
     public Optional<FirstT> toOptional() {
         return Optional.ofNullable(first);
     }
 
+    /**
+     * Creates {@link Pair} from <code>first</code> and <code>second</code>.
+     *
+     * @return Pair made from this Triple
+     */
     public Pair<FirstT, SecondT> toPair() {
         return new Pair<>(first, second);
     }
@@ -42,18 +59,53 @@ public final class Triple<FirstT, SecondT, ThirdT> {
         return third;
     }
 
+    /**
+     * Creates new Triple and sets new first.
+     * <p>
+     * Note: Triple class is immutable! This set creates new Triple.
+     *
+     * @param first new first to set
+     * @return new Triple with set first ; NOT same Triple as this
+     */
     public Triple<FirstT, SecondT, ThirdT> setFirst(final FirstT first) {
         return new Triple<>(first, second, third);
     }
 
+    /**
+     * Creates new Triple and sets new second.
+     * <p>
+     * Note: Triple class is immutable! This set creates new Triple.
+     *
+     * @param second new second to set
+     * @return new Triple with set second ; NOT same Triple as this
+     */
     public Triple<FirstT, SecondT, ThirdT> setSecond(final SecondT second) {
         return new Triple<>(first, second, third);
     }
 
+    /**
+     * Creates new Triple and sets new third.
+     * <p>
+     * Note: Triple class is immutable! This set creates new Triple.
+     *
+     * @param third new third to set
+     * @return new Triple with set third ; NOT same Triple as this
+     */
     public Triple<FirstT, SecondT, ThirdT> setThird(final ThirdT third) {
         return new Triple<>(first, second, third);
     }
 
+    /**
+     * Map this Triple into a new one.
+     *
+     * @param firstMapper  function to map first parameter
+     * @param secondMapper function to map second parameter
+     * @param thirdMapper  function to map third parameter
+     * @param <FirstT2>    type of first in new Pair
+     * @param <SecondT2>   type of second in new Pair
+     * @param <ThirdT2>    type of third in new Pair
+     * @return new Triple
+     */
     public <FirstT2, SecondT2, ThirdT2> Triple<FirstT2, SecondT2, ThirdT2> map(
             Function<FirstT, FirstT2> firstMapper,
             Function<SecondT, SecondT2> secondMapper,
@@ -64,14 +116,35 @@ public final class Triple<FirstT, SecondT, ThirdT> {
                 thirdMapper.apply(third));
     }
 
+    /**
+     * Map this Triple into a new one.
+     *
+     * @param firstMapper function to map first parameter
+     * @param <FirstT2>   type of first in new Triple
+     * @return new Triple
+     */
     public <FirstT2> Triple<FirstT2, SecondT, ThirdT> mapFirst(Function<FirstT, FirstT2> firstMapper) {
         return new Triple<>(firstMapper.apply(first), second, third);
     }
 
+    /**
+     * Map this Triple into a new one.
+     *
+     * @param secondMapper function to map second parameter
+     * @param <SecondT2>   type of second in new Triple
+     * @return new Triple
+     */
     public <SecondT2> Triple<FirstT, SecondT2, ThirdT> mapSecond(Function<SecondT, SecondT2> secondMapper) {
         return new Triple<>(first, secondMapper.apply(second), third);
     }
 
+    /**
+     * Map this Triple into a new one.
+     *
+     * @param thirdMapper function to map third parameter
+     * @param <ThirdT2>   type of third in new Triple
+     * @return new Triple
+     */
     public <ThirdT2> Triple<FirstT, SecondT, ThirdT2> mapThird(Function<ThirdT, ThirdT2> thirdMapper) {
         return new Triple<>(first, second, thirdMapper.apply(third));
     }

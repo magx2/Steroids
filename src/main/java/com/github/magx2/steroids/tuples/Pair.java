@@ -5,6 +5,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+/**
+ * Immutable pair of two values.
+ *
+ * @param <FirstT>  Type of the first parameter
+ * @param <SecondT> Type of the second parameter
+ */
 public final class Pair<FirstT, SecondT> implements Map.Entry<FirstT, SecondT> {
     private final FirstT first;
     private final SecondT second;
@@ -18,10 +24,22 @@ public final class Pair<FirstT, SecondT> implements Map.Entry<FirstT, SecondT> {
         this.second = second;
     }
 
+    /**
+     * Takes <code>first</code> value from Pair and pack it into {@link Optional}.
+     *
+     * @return Optional of first
+     */
     public Optional<FirstT> toOptional() {
         return Optional.ofNullable(first);
     }
 
+    /**
+     * Creates {@link Triple} from Pairs <code>first</code>, <code>second</code> and given <code>third</code>.
+     *
+     * @param third    third value passed to {@link Triple}
+     * @param <ThirdT> type of the third parameter
+     * @return Triple made from this Pair and given third
+     */
     public <ThirdT> Triple<FirstT, SecondT, ThirdT> toTriple(ThirdT third) {
         return new Triple<>(first, second, third);
     }
@@ -34,24 +52,63 @@ public final class Pair<FirstT, SecondT> implements Map.Entry<FirstT, SecondT> {
         return second;
     }
 
+    /**
+     * Creates new Pair and sets new first.
+     * <p>
+     * Note: Pair class is immutable! This set creates new Pair.
+     *
+     * @param first new first to set
+     * @return new Pair with set first ; NOT same Pair as this
+     */
     public Pair<FirstT, SecondT> setFirst(final FirstT first) {
         return new Pair<>(first, second);
     }
 
+    /**
+     * Creates new Pair and sets new second.
+     * <p>
+     * Note: Pair class is immutable! This set creates new Pair.
+     *
+     * @param second new second to set
+     * @return new Pair with set second ; NOT same Pair as this
+     */
     public Pair<FirstT, SecondT> setSecond(final SecondT second) {
         return new Pair<>(first, second);
     }
 
+    /**
+     * Map this Pair into a new one.
+     *
+     * @param firstMapper  function to map first parameter
+     * @param secondMapper function to map second parameter
+     * @param <FirstT2>    type of first in new Pair
+     * @param <SecondT2>   type of second in new Pair
+     * @return new Pair
+     */
     public <FirstT2, SecondT2> Pair<FirstT2, SecondT2> map(
             Function<FirstT, FirstT2> firstMapper,
             Function<SecondT, SecondT2> secondMapper) {
         return new Pair<>(firstMapper.apply(first), secondMapper.apply(second));
     }
 
+    /**
+     * Map this Pair into a new one.
+     *
+     * @param firstMapper function to map first parameter
+     * @param <FirstT2>   type of first in new Pair
+     * @return new Pair
+     */
     public <FirstT2> Pair<FirstT2, SecondT> mapFirst(Function<FirstT, FirstT2> firstMapper) {
         return new Pair<>(firstMapper.apply(first), second);
     }
 
+    /**
+     * Map this Pair into a new one.
+     *
+     * @param secondMapper function to map second parameter
+     * @param <SecondT2>   type of second in new Pair
+     * @return new Pair
+     */
     public <SecondT2> Pair<FirstT, SecondT2> mapSecond(Function<SecondT, SecondT2> secondMapper) {
         return new Pair<>(first, secondMapper.apply(second));
     }
@@ -66,6 +123,12 @@ public final class Pair<FirstT, SecondT> implements Map.Entry<FirstT, SecondT> {
         return second;
     }
 
+    /**
+     * This is unsupported. Pair is immutable.
+     *
+     * @return never
+     * @throws UnsupportedOperationException always
+     */
     @Override
     public SecondT setValue(final SecondT value) {
         throw new UnsupportedOperationException("This map entry is immutable!");
