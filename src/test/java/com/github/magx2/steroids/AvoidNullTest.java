@@ -48,7 +48,7 @@ class AvoidNullTest {
     @DisplayName("should throw `NullPointerException` if only passed null")
     void firstNonNullOneNull() {
         // when
-        ThrowableAssert.ThrowingCallable when = () -> AvoidNull.firstNonNull(null);
+        ThrowableAssert.ThrowingCallable when = () -> AvoidNull.firstNonNull((Object) null);
 
         // then
         assertThatThrownBy(when)
@@ -104,7 +104,7 @@ class AvoidNullTest {
     @DisplayName("should return empty `Optional` if only passed null")
     void tryFirstNonNullOneNull() {
         // when
-        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull(null);
+        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull((Object) null);
 
         // then
         assertThat(firstNonNull).isEmpty();
@@ -124,7 +124,7 @@ class AvoidNullTest {
     @DisplayName("should return empty `Optional` if all objects was null")
     void tryFirstNonNullRestIsNull() {
         // when
-        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull(null, (Object[]) null);
+        final Optional<Object> firstNonNull = AvoidNull.tryFirstNonNull((Object[]) null);
 
         // then
         assertThat(firstNonNull).isEmpty();

@@ -24,11 +24,9 @@ public final class AvoidNull {
 
     @SuppressWarnings("unchecked")
     @NotNull
-    public static <T> T firstNonNull(T first, T... rest) {
-        if (first != null) {
-            return first;
-        } else if (rest != null) {
-            for (T object : rest) {
+    public static <T> T firstNonNull(T... objects) {
+        if (objects != null) {
+            for (T object : objects) {
                 if (object != null) {
                     return object;
                 }
@@ -38,11 +36,9 @@ public final class AvoidNull {
     }
 
     @SafeVarargs
-    public static <T> Optional<T> tryFirstNonNull(T first, T... rest) {
-        if (first != null) {
-            return Optional.of(first);
-        } else if (rest != null) {
-            for (T object : rest) {
+    public static <T> Optional<T> tryFirstNonNull(T... objects) {
+        if (objects != null) {
+            for (T object : objects) {
                 if (object != null) {
                     return Optional.of(object);
                 }
